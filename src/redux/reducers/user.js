@@ -13,9 +13,7 @@ const userReducer = (state = estadoInicial, action) => {
   case LOGA_USUARIO:
     return {
       ...state,
-      user: {
-        ...action.payload,
-      },
+      ...action.payload,
     };
   default:
     return state;

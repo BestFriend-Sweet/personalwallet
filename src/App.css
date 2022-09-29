@@ -3,6 +3,19 @@
   padding: 0;
 }
 
+body {
+  color: #030201;
+}
+
+header {
+  align-items: center;
+  background-color: #fcc729;
+  color: #9c4803;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
 .login-box {
   align-items: center;
   border: 1px black solid;
@@ -24,4 +37,22 @@
 .login-header {
   font-size: larger;
   margin-bottom: 20px;
+}
+
+.logo {
+  color: #9c4803;
+}
+
+.header-info {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  text-align: center;
+}
+
+.header-info p {
+  color: #030201;
+  font-size: small;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
