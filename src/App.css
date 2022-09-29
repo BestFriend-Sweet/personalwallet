@@ -18,20 +18,31 @@ header {
 
 .login-box {
   align-items: center;
-  border: 1px black solid;
-  display: flex;
-  flex: column;
-  flex-wrap: wrap;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 5px 10px;
   justify-content: center;
   margin: 20% auto;
+  max-width: 40vw;
   padding: 20px;
-  width: 60vw;
+  text-align: center;
 }
 
 .login-box form {
   align-items: center;
   display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
   justify-content: center;
+  padding: 10px;
+}
+
+.login-box input {
+  height: 20px;
+  width: 20vw;
+}
+
+.login-box button {
+  height: 25px;
+  width: 10vw;
 }
 
 .login-header {
