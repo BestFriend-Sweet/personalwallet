@@ -31,9 +31,9 @@ class Login extends React.Component {
     const validaEmail = regex.test(email);
     const validaPassword = password.length > MIN_PASSWORD_LENGTH;
     if (validaEmail && validaPassword) {
-      this.setState({
-        botaoEstaDesabilitado: false,
-      });
+      this.setState({ botaoEstaDesabilitado: false });
+    } else {
+      this.setState({ botaoEstaDesabilitado: true });
     }
   }
 
