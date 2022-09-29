@@ -2,10 +2,8 @@
 import { LOGA_USUARIO } from '../actions';
 
 const estadoInicial = {
-  user: {
-    email: '',
-    password: '',
-  },
+  email: '',
+  password: '',
 };
 
 const userReducer = (state = estadoInicial, action) => {
