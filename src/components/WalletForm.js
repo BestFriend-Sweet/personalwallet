@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import teste from 'prop-types';
+import { fetchaMoedas } from '../redux/actions';
 
 class WalletForm extends Component {
+  state = {
+    moedas: [],
+    loading: true,
+  };
+
+  componentDidMount() {
+    const fetchCurrencies = async () => {
+      await fetch('https://economia.awesomeapi.com.br/json/all')
+        .then((response) => response.json())
+        .then((data) => this.portaMoedas(data))
+        .catch((err) => console.log(err));
+    };
+    fetchCurrencies();
+  }
+
+  portaMoedas = (data) => {
+    const { currencies } = this.props;
+    this.setState({
+      moedas: Object.keys(data),
+      loading: false,
+    });
+    currencies(data);
+  };
+
   render() {
+    const { moedas, loading } = this.state;
     return (
       <div className="walletform">
         <form>
@@ -32,7 +60,13 @@ class WalletForm extends Component {
             <select
               data-testid="currency-input"
             >
-              (mapear a chave currencies)
+              { loading || moedas.map((coin) => (
+                <option
+                  value={ coin }
+                  key={ coin }
+                >
+                  { coin }
+                </option>)) }
             </select>
             <br />
             Moeda
@@ -68,4 +102,12 @@ class WalletForm extends Component {
   }
 }
 
-export default WalletForm;
+WalletForm.propTypes = {
+  currencies: teste.shape(),
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  currencies: (coins) => dispatch(fetchaMoedas(coins)),
+});
+
+export default connect(null, mapDispatchToProps)(WalletForm);
