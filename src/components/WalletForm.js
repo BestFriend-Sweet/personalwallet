@@ -21,15 +21,18 @@ class WalletForm extends Component {
 
   portaMoedas = (data) => {
     const { currencies } = this.props;
+    const soAsChaves = Object.keys(data);
+    const semUsdt = soAsChaves.filter((naoUsdt) => naoUsdt !== 'USDT');
     this.setState({
-      moedas: Object.keys(data),
+      moedas: semUsdt,
       loading: false,
     });
-    currencies(data);
+    currencies(semUsdt);
   };
 
   render() {
     const { moedas, loading } = this.state;
+    // const { loading, e, currencies } = this.props;
     return (
       <div className="walletform">
         <form>

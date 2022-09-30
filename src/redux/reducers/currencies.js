@@ -1,4 +1,3 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { FETCHA_AS_MOEDAS } from '../actions';
 
 const estadoInicial = [];
@@ -8,7 +7,7 @@ const currencies = (state = estadoInicial, action) => {
   case FETCHA_AS_MOEDAS:
     return {
       ...state,
-      currencies: action.payload,
+      ...action.payload,
     };
   default:
     return state;
