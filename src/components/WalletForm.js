@@ -7,6 +7,12 @@ class WalletForm extends Component {
   state = {
     moedas: [],
     loading: true,
+    expenses: [],
+    valor: '',
+    description: '',
+    currency: '',
+    method: '',
+    tag: '',
   };
 
   componentDidMount() {
@@ -19,6 +25,10 @@ class WalletForm extends Component {
     fetchCurrencies();
   }
 
+  lidaComMudanca = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
   portaMoedas = (data) => {
     const { currencies } = this.props;
     const soAsChaves = Object.keys(data);
@@ -30,28 +40,50 @@ class WalletForm extends Component {
     currencies(semUsdt);
   };
 
+  novaDespesa = () => {
+    // pegar o array atual
+    const { valor, description, currency, method, tag, expenses } = this.state;
+    // fetcha a cotação atual
+
+    // prepara o objeto a ser salvo
+    const despesaAdicionada = {
+      id: expenses.length + 1,
+      value: valor,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates,
+    };
+    console.log(despesaAdicionada);
+  };
+
   render() {
     const { moedas, loading } = this.state;
-    // const { loading, e, currencies } = this.props;
+    const { valor, description } = this.state;
     return (
       <div className="walletform">
         <form>
-          <label htmlFor="valorDaDespesa">
+          <label htmlFor="valor">
             <input
-              id="valorDaDespesa"
-              name="valorDaDespesa"
+              id="valor"
+              name="valor"
               type="number"
               data-testid="value-input"
               min="0"
               placeholder="0"
+              value={ valor }
+              onChange={ this.lidaComMudanca }
             />
             <br />
             Valor
           </label>
-          <label htmlFor="descricao">
+          <label htmlFor="description">
             <input
-              id="descricao"
-              name="descricao"
+              id="description"
+              name="description"
+              value={ description }
+              onChange={ this.lidaComMudanca }
               type="text"
               data-testid="description-input"
               placeholder="Descrição"
@@ -62,9 +94,12 @@ class WalletForm extends Component {
           <div>
             <select
               data-testid="currency-input"
+              name="currency"
+              onChange={ this.lidaComMudanca }
             >
               { loading || moedas.map((coin) => (
                 <option
+                  name="currency"
                   value={ coin }
                   key={ coin }
                 >
@@ -77,10 +112,27 @@ class WalletForm extends Component {
           <div>
             <select
               data-testid="method-input"
+              name="method"
+              onChange={ this.lidaComMudanca }
             >
-              <option value="dinheiro">Dinheiro</option>
-              <option value="cc">Cartão de crédito</option>
-              <option value="cd">Cartão de débito</option>
+              <option
+                value="dinheiro"
+                name="method"
+              >
+                Dinheiro
+              </option>
+              <option
+                value="cartao_de_credito"
+                name="method"
+              >
+                Cartão de crédito
+              </option>
+              <option
+                value="cartao_de_debito"
+                name="method"
+              >
+                Cartão de débito
+              </option>
             </select>
             <br />
             Forma de pagamento
@@ -89,15 +141,26 @@ class WalletForm extends Component {
           <div>
             <select
               data-testid="tag-input"
+              name="tag"
+              onChange={ this.lidaComMudanca }
             >
-              <option value="alimentacao">Alimentação</option>
-              <option value="lazer">Lazer</option>
-              <option value="trabalho">Trabalho</option>
-              <option value="transporte">Transporte</option>
-              <option value="saude">Saúde</option>
+              <option name="tag" value="alimentacao">Alimentação</option>
+              <option name="tag" value="lazer">Lazer</option>
+              <option name="tag" value="trabalho">Trabalho</option>
+              <option name="tag" value="transporte">Transporte</option>
+              <option name="tag" value="saude">Saúde</option>
             </select>
             <br />
             Tag
+          </div>
+
+          <div>
+            <button
+              type="button"
+              onClick={ () => this.novaDespesa() }
+            >
+              Adicionar despesa
+            </button>
           </div>
         </form>
       </div>
