@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import teste from 'prop-types';
-import { fetchaMoedas } from '../redux/actions';
+import { fetchaMoedas, gastaNoGlobal } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -10,20 +10,23 @@ class WalletForm extends Component {
     expenses: [],
     valor: '',
     description: '',
-    currency: '',
-    method: '',
-    tag: '',
+    currency: 'USD',
+    method: 'dinheiro',
+    tag: 'alimentacao',
   };
 
   componentDidMount() {
-    const fetchCurrencies = async () => {
-      await fetch('https://economia.awesomeapi.com.br/json/all')
-        .then((response) => response.json())
-        .then((data) => this.portaMoedas(data))
-        .catch((err) => console.log(err));
+    const fazAFrente = async () => {
+      const cotaAi = await this.pegaCotacao();
+      this.portaMoedas(cotaAi);
     };
-    fetchCurrencies();
+    fazAFrente();
   }
+
+  pegaCotacao = async () => fetch('https://economia.awesomeapi.com.br/json/all')
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => console.log(err));
 
   lidaComMudanca = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
@@ -31,22 +34,21 @@ class WalletForm extends Component {
 
   portaMoedas = (data) => {
     const { currencies } = this.props;
-    const soAsChaves = Object.keys(data);
-    const semUsdt = soAsChaves.filter((naoUsdt) => naoUsdt !== 'USDT');
+    const chavesSemUsdt = Object.keys(data).filter((naoUsdt) => naoUsdt !== 'USDT');
     this.setState({
-      moedas: semUsdt,
+      moedas: chavesSemUsdt,
       loading: false,
-    });
-    currencies(semUsdt);
+    }, () => currencies(chavesSemUsdt));
   };
 
-  novaDespesa = () => {
-    // pegar o array atual
+  novaDespesa = async () => {
+    // as infos do estado
     const { valor, description, currency, method, tag, expenses } = this.state;
+    const { addDespesaNoGlobal } = this.props;
     // fetcha a cotação atual
-
+    const exchangeRates = await this.pegaCotacao();
     // prepara o objeto a ser salvo
-    const despesaAdicionada = {
+    const novaDespesa = {
       id: expenses.length + 1,
       value: valor,
       description,
@@ -55,7 +57,12 @@ class WalletForm extends Component {
       tag,
       exchangeRates,
     };
-    console.log(despesaAdicionada);
+    // insere a despesa no array expenses
+    this.setState((prevState) => ({
+      valor: '',
+      description: '',
+      expenses: [...prevState.expenses, novaDespesa],
+    }), () => addDespesaNoGlobal(novaDespesa));
   };
 
   render() {
@@ -174,6 +181,7 @@ WalletForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   currencies: (coins) => dispatch(fetchaMoedas(coins)),
+  addDespesaNoGlobal: (despesa) => dispatch(gastaNoGlobal(despesa)),
 });
 
 export default connect(null, mapDispatchToProps)(WalletForm);

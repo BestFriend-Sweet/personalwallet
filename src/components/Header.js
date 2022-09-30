@@ -3,13 +3,23 @@ import teste from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends Component {
-  state = {
-    desp: 0,
+  calculaValor = () => {
+    const { expenses } = this.props;
+    let valorTemp = 0;
+    if (expenses.length > 0) {
+      expenses.forEach((despesa) => {
+        const valorDaDespesa = despesa.value;
+        const cotacao = despesa.exchangeRates[despesa.currency].ask;
+        valorTemp += valorDaDespesa * cotacao;
+      });
+    }
+    // O retorno comentado é mais bonito
+    // return valorTemp.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+    return valorTemp.toFixed(2);
   };
 
   render() {
     const { email } = this.props;
-    const { desp } = this.state;
     return (
       <header>
         <div className="logo">
@@ -24,7 +34,7 @@ class Header extends Component {
           <div>
             <h5>Total de despesas</h5>
             <p data-testid="total-field">
-              { desp.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }
+              { this.calculaValor() }
             </p>
           </div>
           <div>

@@ -1,9 +1,6 @@
 export const LOGA_USUARIO = 'LOGA_USUARIO';
 export const FETCHA_AS_MOEDAS = 'FETCHA_AS_MOEDAS';
-
-export const FETCHCOINS_INICIALIZA = 'FETCHCOINS_INICIALIZA';
-export const FETCHCOINS_PEGOU = 'FETCHCOINS_PEGOU';
-export const FETCHCOINS_DEURUIM = 'FETCHCOINS_DEURUIM';
+export const NOVA_DESPESA = 'NOVA_DESPESA';
 
 const appLogin = (dados) => ({
   type: LOGA_USUARIO,
@@ -15,4 +12,9 @@ const fetchaMoedas = (dados) => ({
   payload: dados,
 });
 
-export { appLogin, fetchaMoedas };
+const gastaNoGlobal = (dados) => ({
+  type: NOVA_DESPESA,
+  payload: dados,
+});
+
+export { appLogin, fetchaMoedas, gastaNoGlobal };
