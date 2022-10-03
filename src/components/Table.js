@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import teste from 'prop-types';
 import { connect } from 'react-redux';
+import { deletaNoGlobal } from '../redux/actions';
 
 class Table extends Component {
+  deletaDespesa = ({ target: { id } }) => {
+    const { expenses, atualizaDespesas } = this.props;
+    const idDaDespesa = expenses[id];
+    expenses.splice(idDaDespesa, 1);
+    atualizaDespesas(expenses);
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -32,7 +40,16 @@ class Table extends Component {
                 { (rate * expense.value).toFixed(2) }
               </td>
               <td>Real</td>
-              <td>Editar/Excluir</td>
+              <td>
+                <button
+                  type="button"
+                  data-testid="delete-btn"
+                  id={ expense.id }
+                  onClick={ (e) => this.deletaDespesa(e) }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           );
         }) }
@@ -49,4 +66,8 @@ const mapStateToProps = (state) => ({
   ...state.wallet,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  atualizaDespesas: (despesa) => dispatch(deletaNoGlobal(despesa)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

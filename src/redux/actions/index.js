@@ -1,6 +1,7 @@
 export const LOGA_USUARIO = 'LOGA_USUARIO';
 export const FETCHA_AS_MOEDAS = 'FETCHA_AS_MOEDAS';
 export const NOVA_DESPESA = 'NOVA_DESPESA';
+export const DELETA_DESPESA = 'DELETA_DESPESA';
 
 const appLogin = (dados) => ({
   type: LOGA_USUARIO,
@@ -17,4 +18,9 @@ const gastaNoGlobal = (dados) => ({
   payload: dados,
 });
 
-export { appLogin, fetchaMoedas, gastaNoGlobal };
+const deletaNoGlobal = (dados) => ({
+  type: DELETA_DESPESA,
+  payload: dados,
+});
+
+export { appLogin, fetchaMoedas, gastaNoGlobal, deletaNoGlobal };

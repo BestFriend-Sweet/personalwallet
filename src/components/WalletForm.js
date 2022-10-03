@@ -45,11 +45,15 @@ class WalletForm extends Component {
     // as infos do estado
     const { valor, description, currency, method, tag, expenses } = this.state;
     const { addDespesaNoGlobal } = this.props;
+    const MENOS_UM = -1;
     // fetcha a cotação atual
     const exchangeRates = await this.pegaCotacao();
+    let qualId = MENOS_UM;
+    if (expenses.length > 0) qualId = expenses[expenses.length - 1].id;
+    console.log(qualId);
     // prepara o objeto a ser salvo
     const novaDespesa = {
-      id: expenses.length || 0,
+      id: qualId + 1,
       value: valor,
       description,
       currency,

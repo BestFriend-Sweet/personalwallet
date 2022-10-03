@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { FETCHA_AS_MOEDAS, NOVA_DESPESA } from '../actions';
+import { DELETA_DESPESA, FETCHA_AS_MOEDAS, NOVA_DESPESA } from '../actions';
 
 const estadoInicial = {
   currencies: [],
@@ -17,6 +17,11 @@ const currencies = (state = estadoInicial, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
+    };
+  case DELETA_DESPESA:
+    return {
+      ...state,
+      expenses: [...action.payload],
     };
   default:
     return state;
