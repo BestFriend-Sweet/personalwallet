@@ -86,3 +86,15 @@ header {
   gap: 25px;
   justify-content: center;
 }
+
+.expenses {
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  width: 95vw;
+}
+
+.expenses th {
+  border-bottom: 1px black solid;
+  padding-bottom: 8px;
+}
