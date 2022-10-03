@@ -49,7 +49,7 @@ class WalletForm extends Component {
     const exchangeRates = await this.pegaCotacao();
     // prepara o objeto a ser salvo
     const novaDespesa = {
-      id: expenses.length + 1,
+      id: expenses.length || 0,
       value: valor,
       description,
       currency,
@@ -66,8 +66,7 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { moedas, loading } = this.state;
-    const { valor, description } = this.state;
+    const { moedas, loading, valor, description } = this.state;
     return (
       <div className="walletform">
         <form>
@@ -123,19 +122,19 @@ class WalletForm extends Component {
               onChange={ this.lidaComMudanca }
             >
               <option
-                value="dinheiro"
+                value="Dinheiro"
                 name="method"
               >
                 Dinheiro
               </option>
               <option
-                value="cartao_de_credito"
+                value="Cartão de crédito"
                 name="method"
               >
                 Cartão de crédito
               </option>
               <option
-                value="cartao_de_debito"
+                value="Cartão de débito"
                 name="method"
               >
                 Cartão de débito
@@ -151,11 +150,11 @@ class WalletForm extends Component {
               name="tag"
               onChange={ this.lidaComMudanca }
             >
-              <option name="tag" value="alimentacao">Alimentação</option>
-              <option name="tag" value="lazer">Lazer</option>
-              <option name="tag" value="trabalho">Trabalho</option>
-              <option name="tag" value="transporte">Transporte</option>
-              <option name="tag" value="saude">Saúde</option>
+              <option name="tag" value="Alimentação">Alimentação</option>
+              <option name="tag" value="Lazer">Lazer</option>
+              <option name="tag" value="Trabalho">Trabalho</option>
+              <option name="tag" value="Transporte">Transporte</option>
+              <option name="tag" value="Saúde">Saúde</option>
             </select>
             <br />
             Tag
