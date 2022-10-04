@@ -98,3 +98,7 @@ header {
   border-bottom: 1px black solid;
   padding-bottom: 8px;
 }
+
+.eh-desc {
+  min-width: 15vw;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import teste from 'prop-types';
-import { fetchaMoedas, gastaNoGlobal } from '../redux/actions';
+import { fetchaMoedas, gastaNoGlobal, editaDespesaExistente } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -11,8 +11,8 @@ class WalletForm extends Component {
     valor: '',
     description: '',
     currency: 'USD',
-    method: 'dinheiro',
-    tag: 'alimentacao',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
   };
 
   componentDidMount() {
@@ -50,7 +50,6 @@ class WalletForm extends Component {
     const exchangeRates = await this.pegaCotacao();
     let qualId = MENOS_UM;
     if (expenses.length > 0) qualId = expenses[expenses.length - 1].id;
-    console.log(qualId);
     // prepara o objeto a ser salvo
     const novaDespesa = {
       id: qualId + 1,
@@ -69,8 +68,25 @@ class WalletForm extends Component {
     }), () => addDespesaNoGlobal(novaDespesa));
   };
 
+  editaDespesa = () => {
+    const { idDeEdicao, expenses, editaDespesaExistenteNoGlobal } = this.props;
+    const { valor, description, currency, method, tag } = this.state;
+    const novaDespesa = {
+      id: idDeEdicao,
+      value: valor,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: expenses[idDeEdicao].exchangeRates,
+    };
+    expenses.splice(idDeEdicao, 1, novaDespesa);
+    editaDespesaExistenteNoGlobal(expenses);
+  };
+
   render() {
     const { moedas, loading, valor, description } = this.state;
+    const { editandoDespesa } = this.props;
     return (
       <div className="walletform">
         <form>
@@ -165,12 +181,22 @@ class WalletForm extends Component {
           </div>
 
           <div>
-            <button
-              type="button"
-              onClick={ () => this.novaDespesa() }
-            >
-              Adicionar despesa
-            </button>
+            { editandoDespesa
+              ? (
+                <button
+                  type="button"
+                  onClick={ () => this.editaDespesa() }
+                >
+                  Editar despesa
+                </button>
+              )
+              : (
+                <button
+                  type="button"
+                  onClick={ () => this.novaDespesa() }
+                >
+                  Adicionar despesa
+                </button>)}
           </div>
         </form>
       </div>
@@ -182,9 +208,14 @@ WalletForm.propTypes = {
   currencies: teste.shape(),
 }.isRequired;
 
+const mapStateToProps = (state) => ({
+  ...state.wallet,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   currencies: (coins) => dispatch(fetchaMoedas(coins)),
   addDespesaNoGlobal: (despesa) => dispatch(gastaNoGlobal(despesa)),
+  editaDespesaExistenteNoGlobal: (despesa) => dispatch(editaDespesaExistente(despesa)),
 });
 
-export default connect(null, mapDispatchToProps)(WalletForm);
+export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
