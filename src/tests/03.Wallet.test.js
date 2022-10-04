@@ -36,7 +36,12 @@ describe('Testa efetivamente a carteira', () => {
     const currencies = screen.getByTestId('currency-input');
     expect(currencies).toBeInTheDocument();
     await waitFor(() => expect(currencies).toHaveValue('USD'));
-    userEvent.selectOptions(currencies, 'CAD');
+    userEvent.selectOptions(currencies, 'XRP');
     expect(fetch).toHaveBeenCalled();
+    userEvent.type(screen.getByRole('spinbutton'), '10');
+    userEvent.type(screen.getByRole('textbox', { name: /descrição/i }), 'Dez dolares canadenses');
+    userEvent.click(screen.getByRole('button'), { name: /adicionar despesa/i });
+    expect(screen.getByText('Método de pagamento')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getAllByText(/19\.30/i)[0]).toBeInTheDocument());
   });
 });
