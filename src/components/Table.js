@@ -18,10 +18,10 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table className="expenses" hidden={ expenses.length < 1 }>
+      <table hidden={ expenses.length < 1 }>
         <thead>
           <tr className="expenses-header">
-            <th className="eh-desc">Descrição</th>
+            <th className="desctd">Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
             <th>Valor</th>
@@ -36,8 +36,8 @@ class Table extends Component {
           { expenses.map((expense) => {
             const rate = expense.exchangeRates[expense.currency].ask;
             return (
-              <tr key={ expense.id }>
-                <td>{ expense.description }</td>
+              <tr key={ expense.id } className="infoDivida">
+                <td className="desctd">{ expense.description }</td>
                 <td>{ expense.tag }</td>
                 <td>{ expense.method }</td>
                 <td>{ Number(expense.value).toFixed(2) }</td>

@@ -26,7 +26,7 @@ class WalletForm extends Component {
   pegaCotacao = async () => fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
     .then((data) => data)
-    .catch((err) => console.log(err));
+    .catch((err) => err);
 
   lidaComMudanca = ({ target: { name, value } }) => {
     this.setState({ [name]: value });

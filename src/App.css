@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=M+PLUS+Code+Latin&display=swap') ;
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&display=swap') ;
+
 * {
   margin: 0;
   padding: 0;
@@ -5,19 +9,38 @@
 
 body {
   color: #030201;
+  font-family: 'Baloo Bhaijaan 2', cursive;
 }
 
 header {
   align-items: center;
-  background-color: #fcc729;
-  color: #9c4803;
+  background-color: #030201;
   display: flex;
   justify-content: space-between;
   padding: 15px;
 }
 
+.loginpage {
+  background-image: url('../public/background.jpg');
+  background-size: cover;
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
+.loginpage h1 {
+  margin: 200px 0 -250px;
+}
+
+.superfonte {
+  font-family: Bungee Spice, cursive;
+  font-size: 48px;
+  text-shadow: 2px 2px rgba(255, 255, 255, 0.9);
+}
+
 .login-box {
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.4);
   box-shadow: rgba(0, 0, 0, 0.6) 0 5px 10px;
   justify-content: center;
   margin: 20% auto;
@@ -40,9 +63,8 @@ header {
   width: 20vw;
 }
 
-.login-box button {
-  height: 25px;
-  width: 10vw;
+button {
+  background-color: white;
 }
 
 .login-header {
@@ -50,20 +72,22 @@ header {
   margin-bottom: 20px;
 }
 
-.logo {
-  color: #9c4803;
-}
-
 .header-info {
   align-items: center;
   display: flex;
   gap: 20px;
+  margin-right: 20px;
   text-align: center;
 }
 
+.header-info h5 {
+  color: #fca310;
+  font-weight: 300;
+}
+
 .header-info p {
-  color: #030201;
-  font-size: small;
+  color: #fcc729;
+  font-size: medium;
   font-weight: 500;
   letter-spacing: 1px;
 }
@@ -87,18 +111,52 @@ header {
   justify-content: center;
 }
 
-.expenses {
+.walletform input , select , button {
+  border: 1px black solid;
+  border-radius: 5px;
+  height: 30px;
+  text-align: center;
+}
+
+.walletform select , button {
+  width: 150px;
+}
+
+.walletform button {
+  background-color: #fcc729;
+  color: #140e09;
+  font-weight: 600;
+}
+
+table {
   margin: 20px auto;
   padding: 10px;
   text-align: center;
   width: 95vw;
 }
 
-.expenses th {
-  border-bottom: 1px black solid;
-  padding-bottom: 8px;
+.infoDivida {
+  background-color: #eaf5d2;
+  border: 1px black solid;
+  border-radius: 5px;
 }
 
-.eh-desc {
+thead , th {
+  background-color: #140e09;
+  border-radius: 5px;
+  color: #fca310;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.desctd {
   min-width: 15vw;
+}
+
+td {
+  padding: 10px;
+}
+
+.infoDivida:hover {
+  background-color: #fc7000;
 }

@@ -46,34 +46,37 @@ class Login extends React.Component {
   render() {
     const { botaoEstaDesabilitado, email, password } = this.state;
     return (
-      <div className="login-box">
-        <div className="login-header">Bem vindo ao TrybeWallet.</div>
-        <div>
-          <form>
-            <input
-              type="text"
-              name="email"
-              data-testid="email-input"
-              placeholder="Digite seu e-mail"
-              value={ email }
-              onChange={ this.lidaAlteracoes }
-            />
-            <input
-              type="password"
-              name="password"
-              data-testid="password-input"
-              placeholder="Digite sua senha"
-              value={ password }
-              onChange={ this.lidaAlteracoes }
-            />
-            <button
-              type="button"
-              disabled={ botaoEstaDesabilitado }
-              onClick={ () => this.enviaDados() }
-            >
-              Entrar
-            </button>
-          </form>
+      <div className="loginpage">
+        <h1 className="superfonte">TrybeWallet</h1>
+        <div className="login-box">
+          <div className="login-header">Digite seus dados.</div>
+          <div>
+            <form>
+              <input
+                type="text"
+                name="email"
+                data-testid="email-input"
+                placeholder="Digite seu e-mail"
+                value={ email }
+                onChange={ this.lidaAlteracoes }
+              />
+              <input
+                type="password"
+                name="password"
+                data-testid="password-input"
+                placeholder="Digite sua senha"
+                value={ password }
+                onChange={ this.lidaAlteracoes }
+              />
+              <button
+                type="button"
+                disabled={ botaoEstaDesabilitado }
+                onClick={ () => this.enviaDados() }
+              >
+                Entrar
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );
