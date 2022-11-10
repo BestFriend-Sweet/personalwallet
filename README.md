@@ -1,5 +1,7 @@
 # Personal Wallet
 
+<img src="https://github.com/devsakae/personalwallet/blob/main/public/desktop.png" alt="Personal Wallet" />
+
 A project thinked for a person's financial organization.
 
 Use this to register all your expenses and, perhaps, show it to someone? :)
