@@ -23,7 +23,7 @@ class Header extends Component {
     return (
       <header>
         <div className="logo">
-          <h1 className="superfonte">TrybeWallet</h1>
+          <h1 className="superfonte">Personal Wallet</h1>
         </div>
         <div className="header-info">
           <div>

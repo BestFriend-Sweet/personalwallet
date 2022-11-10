@@ -17,6 +17,10 @@ class Login extends React.Component {
     this.verificaBotao = this.verificaBotao.bind(this);
   }
 
+  componentDidMount() {
+    document.title = 'Personal Wallet';
+  }
+
   lidaAlteracoes({ target }) {
     const { name, value } = target;
     this.setState({
@@ -47,7 +51,7 @@ class Login extends React.Component {
     const { botaoEstaDesabilitado, email, password } = this.state;
     return (
       <div className="loginpage">
-        <h1 className="superfonte">TrybeWallet</h1>
+        <h1 className="superfonte">Personal Wallet</h1>
         <div className="login-box">
           <div className="login-header">Digite seus dados.</div>
           <div>
