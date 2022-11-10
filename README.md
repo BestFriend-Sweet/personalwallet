@@ -1,10 +1,18 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Personal Wallet
+
+A project thinked for a person's financial organization.
+
+Use this to register all your expenses and, perhaps, show it to someone? :)
+
+## Info
+
+Project created to attend Trybe's frontend module, delivering 100% of the requirements.
+
+Languages: React, Redux, NodeJs, RTL.
+
+## Use
+
++ Clone the repo
++ Type [code]npm install[/code] to install all dependencies
++ Run with [code]npm start[/code]
++ Access on localhost:3000 (React)
