@@ -13,6 +13,6 @@ Languages: React, Redux, NodeJs, RTL.
 ## Use
 
 + Clone the repo
-+ Type [code]npm install[/code] to install all dependencies
-+ Run with [code]npm start[/code]
++ Type `npm install` to install all dependencies
++ Run with `npm start`
 + Access on localhost:3000 (React)
